@@ -1,8 +1,12 @@
 package com.alaeddine.messadi;
 
-import com.alaeddine.messadi.factory.CommandFactory;
+import com.alaeddine.messadi.src.factory.CommandFactory;
 import com.alaeddine.messadi.src.Canvas;
-import com.alaeddine.messadi.validator.*;
+import com.alaeddine.messadi.src.shapes.Fill;
+import com.alaeddine.messadi.src.shapes.Line;
+import com.alaeddine.messadi.src.shapes.Rectangle;
+import com.alaeddine.messadi.src.shapes.ShapeInterface;
+import com.alaeddine.messadi.src.validator.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -36,10 +40,10 @@ public class AppTest
         String[] parameters1 = {"10", "5"};
         String[] parameters2 = {"10", "5", "4"};
         String[] parameters3 = {"10", "f"};
-        assertTrue(cmd.execute(parameters2) == -1);
-        assertTrue(cmd.execute(parameters3) == -1);
-        assertTrue(cmd.execute(null) == -1);
-        assertTrue(cmd.execute(parameters1) == 0);
+        assertTrue(cmd.execute(parameters2) == null);
+        assertTrue(cmd.execute(parameters3) == null);
+        assertTrue(cmd.execute(null) == null);
+        assertTrue(cmd.execute(parameters1) instanceof Line);
     }
 
     public void testCommandL() {
@@ -55,15 +59,19 @@ public class AppTest
         String[] parametersL2 = {"1", "2", "6", "2", "2"};
         String[] parametersL3 = {"1", "2", "6", "L"};
         String[] parametersL4 = {"1", "2", "6"};
+        String[] parametersL5 = {"6", "3", "6", "4"}; // correct parameters
 
-        assertTrue(cmdL.execute(parametersL1) == -1);
+        assertTrue(cmdL.execute(parametersL1) == null);
         cmdC.execute(parametersC);
         canvas = cmdC.getCanvas();
         cmdL.setCanvas(canvas);
-        assertTrue(cmdL.execute(parametersL2) == -1);
-        assertTrue(cmdL.execute(parametersL3) == -1);
-        assertTrue(cmdL.execute(parametersL4) == -1);
-        assertTrue(cmdL.execute(parametersL1) == 0);
+        assertTrue(cmdL.execute(parametersL2) == null);
+        assertTrue(cmdL.execute(parametersL3) == null);
+        assertTrue(cmdL.execute(parametersL4) == null);
+        ShapeInterface line = cmdL.execute(parametersL1);
+        ShapeInterface line2 = cmdL.execute(parametersL5);
+        assertTrue(line instanceof Line);
+        assertTrue(line2 instanceof Line);
     }
 
     public void testCommandR() {
@@ -80,17 +88,19 @@ public class AppTest
         String[] parametersR3 = {"16", "1", "20", "L"};
         String[] parametersR4 = {"16", "1", "20"};
 
-        assertTrue(cmdL.execute(parametersR1) == -1);
+        assertTrue(cmdL.execute(parametersR1) == null);
         cmdC.execute(parametersC);
         canvas = cmdC.getCanvas();
         cmdL.setCanvas(canvas);
-        assertTrue(cmdL.execute(parametersR2) == -1);
-        assertTrue(cmdL.execute(parametersR3) == -1);
-        assertTrue(cmdL.execute(parametersR4) == -1);
-        assertTrue(cmdL.execute(parametersR1) == 0);
+        assertTrue(cmdL.execute(parametersR2) == null);
+        assertTrue(cmdL.execute(parametersR3) == null);
+        assertTrue(cmdL.execute(parametersR4) == null);
+
+        ShapeInterface rectangle = cmdL.execute(parametersR1);
+        assertTrue(rectangle instanceof Rectangle);
     }
 
-    public void testCommandF() {
+    public void testCommandB() {
         Canvas canvas;
         CommandFactory commandFactory = new CommandFactory();
         Command cmdC = commandFactory.getCommand('c');
@@ -104,14 +114,15 @@ public class AppTest
         String[] parametersB3 = {"10", "B", "O"};
         String[] parametersB4 = {"10", "3"};
 
-        assertTrue(cmdB.execute(parametersB1) == -1);
+        assertTrue(cmdB.execute(parametersB1) == null);
         cmdC.execute(parametersC);
         canvas = cmdC.getCanvas();
         cmdB.setCanvas(canvas);
-        assertTrue(cmdB.execute(parametersB2) == -1);
-        assertTrue(cmdB.execute(parametersB3) == -1);
-        assertTrue(cmdB.execute(parametersB4) == -1);
-        assertTrue(cmdB.execute(parametersB1) == 0);
+        assertTrue(cmdB.execute(parametersB2) == null);
+        assertTrue(cmdB.execute(parametersB3) == null);
+        assertTrue(cmdB.execute(parametersB4) == null);
+        ShapeInterface fill = cmdB.execute(parametersB1);
+        assertTrue( fill instanceof Fill);
     }
 
     public void testApp() {
@@ -128,26 +139,26 @@ public class AppTest
         String[] parametersB = {"10", "3", "o"};
 
         // create
-        assertTrue(cmd.execute(parametersC) == 0);
+        assertTrue(cmd.execute(parametersC) instanceof Line);
         canvas = cmd.getCanvas();
 
         // line
         cmd = commandFactory.getCommand('l');
         assertTrue(cmd instanceof CmdL);
         cmd.setCanvas(canvas);
-        assertTrue(cmd.execute(parametersL1) == 0);
-        assertTrue(cmd.execute(parametersL2) == 0);
+        assertTrue(cmd.execute(parametersL1) instanceof Line);
+        assertTrue(cmd.execute(parametersL2) instanceof Line);
 
         // rectangle
         cmd = commandFactory.getCommand('r');
         assertTrue(cmd instanceof CmdR);
         cmd.setCanvas(canvas);
-        assertTrue(cmd.execute(parametersR) == 0);
+        assertTrue(cmd.execute(parametersR) instanceof Rectangle);
 
         // bucket fill
         cmd = commandFactory.getCommand('b');
         assertTrue(cmd instanceof CmdB);
         cmd.setCanvas(canvas);
-        assertTrue(cmd.execute(parametersB) == 0);
+        assertTrue(cmd.execute(parametersB) instanceof Fill);
     }
 }

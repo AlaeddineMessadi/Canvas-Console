@@ -1,9 +1,8 @@
-package com.alaeddine.messadi.validator;
+package com.alaeddine.messadi.src.validator;
 
-import com.alaeddine.messadi.src.Canvas;
 import com.alaeddine.messadi.src.Point;
 import com.alaeddine.messadi.src.shapes.Line;
-import com.alaeddine.messadi.src.shapes.Shape;
+import com.alaeddine.messadi.src.shapes.ShapeInterface;
 
 public class CmdL extends Command{
 
@@ -11,16 +10,17 @@ public class CmdL extends Command{
         return "l";
     }
 
-    public int execute(String[] parameters) {
+    public ShapeInterface execute(String[] parameters) {
         if (!this.validate(parameters)) {
-            return -1;
+            return null;
         }
 
         Point p1 = new Point(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
         Point p2 = new Point(Integer.parseInt(parameters[2]), Integer.parseInt(parameters[3]));
-        Shape shape = new Line(p1, p2, this.canvas);
-        shape.draw();
-        return 0;
+        ShapeInterface line = new Line(p1, p2);
+        canvas.addShape(line);
+        canvas.printCanvas();
+        return line;
     }
 
     public boolean validateLength(String[] parameters) {

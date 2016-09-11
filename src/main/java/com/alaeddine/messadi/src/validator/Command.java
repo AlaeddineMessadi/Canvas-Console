@@ -1,6 +1,7 @@
-package com.alaeddine.messadi.validator;
+package com.alaeddine.messadi.src.validator;
 
 import com.alaeddine.messadi.src.Canvas;
+import com.alaeddine.messadi.src.shapes.ShapeInterface;
 
 public abstract class Command {
     protected static final int QUIT = 0;
@@ -20,7 +21,7 @@ public abstract class Command {
 
     public abstract String getName();
 
-    public abstract int execute(String[] parameters);
+    public abstract ShapeInterface execute(String[] parameters);
 
     public abstract boolean validateLength(String[] parameters);
 
@@ -49,6 +50,14 @@ public abstract class Command {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean validateParams(String[] parameters){
+        if (parameters == null){
+            System.out.println("Parameters are missing");
             return false;
         }
         return true;

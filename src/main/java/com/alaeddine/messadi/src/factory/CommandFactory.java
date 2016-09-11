@@ -1,7 +1,7 @@
-package com.alaeddine.messadi.factory;
+package com.alaeddine.messadi.src.factory;
 
 
-import com.alaeddine.messadi.validator.*;
+import com.alaeddine.messadi.src.validator.*;
 
 public class CommandFactory {
     public Command getCommand(Character cmd) {

@@ -1,8 +1,9 @@
 package com.alaeddine.messadi;
 
-import com.alaeddine.messadi.factory.CommandFactory;
+import com.alaeddine.messadi.src.factory.CommandFactory;
 import com.alaeddine.messadi.src.Canvas;
-import com.alaeddine.messadi.validator.*;
+import com.alaeddine.messadi.src.shapes.ShapeInterface;
+import com.alaeddine.messadi.src.validator.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -40,11 +41,12 @@ public class App
                             command = commandFactory.getCommand(cmd);
                             command.execute(parameters);
                             canvas = command.getCanvas();
+                            canvas.printCanvas();
                             break;
                         case 'l' :
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
-                            command.execute(parameters);
+                            ShapeInterface line = command.execute(parameters);
                             break;
                         case 'r' :
                             command = commandFactory.getCommand(cmd);

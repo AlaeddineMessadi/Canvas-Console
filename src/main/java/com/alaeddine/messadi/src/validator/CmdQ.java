@@ -1,18 +1,18 @@
-package com.alaeddine.messadi.validator;
+package com.alaeddine.messadi.src.validator;
 
-import com.alaeddine.messadi.src.Canvas;
+import com.alaeddine.messadi.src.shapes.ShapeInterface;
 
 public class CmdQ extends Command {
     public String getName() {
         return "q";
     }
 
-    public int execute(String[] parameters) {
+    public ShapeInterface execute(String[] parameters) {
         if (this.validateLength(parameters)) {
             System.out.println("Exit...");
             System.exit(0);
         }
-        return 0;
+        return null;
     }
 
     public boolean validateLength(String[] parameters) {

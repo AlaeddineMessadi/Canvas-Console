@@ -1,37 +1,34 @@
 package com.alaeddine.messadi.src.shapes;
 
-import com.alaeddine.messadi.src.Canvas;
 import com.alaeddine.messadi.src.Point;
 
-public class Fill extends Shape {
+public class Fill implements ShapeInterface {
     private Point p;
-    private Character color;
+    private byte color;
 
-    public Fill(Point p, Character color, Canvas canvas) {
-        super(canvas);
+    public Fill(Point p, byte color) {
         this.p = p;
         this.color = color;
     }
 
-    public void draw() {
-        bucketFill(super.canvas,this.p);
-        super.canvas.printCanvas();
+    public byte[][] draw(byte[][] output) {
+        bucketFill(output,this.p);
+        return output;
     }
 
     /**
      * BucketFill Method, Fill empty spaces to the edge of other shapes
-     * @param canvas Canvas
+     * @param output byte[][]
      * @param p Point
      */
-    private void bucketFill(Canvas canvas, Point p) {
-
-        int currentColor = canvas.getValueAt(p);
+    private void bucketFill(byte[][] output, Point p) {
+        int currentColor = output[p.getY()][p.getX()];
         if (currentColor == ' ') {
-            canvas.setCharAt(new Point(p.getX(),p.getY()), this.color);
-            bucketFill(canvas, new Point(p.getX()+1, p.getY()));
-            bucketFill(canvas, new Point(p.getX()-1, p.getY()));
-            bucketFill(canvas, new Point(p.getX(), p.getY()+1));
-            bucketFill(canvas, new Point(p.getX()+1, p.getY()-1));
+            output[p.getY()][p.getX()] = this.color;
+            bucketFill(output, new Point(p.getX()+1, p.getY()));
+            bucketFill(output, new Point(p.getX()-1, p.getY()));
+            bucketFill(output, new Point(p.getX(), p.getY()+1));
+            bucketFill(output, new Point(p.getX()+1, p.getY()-1));
         }
     }
 

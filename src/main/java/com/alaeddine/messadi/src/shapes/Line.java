@@ -1,15 +1,15 @@
 package com.alaeddine.messadi.src.shapes;
 
-import com.alaeddine.messadi.src.Canvas;
 import com.alaeddine.messadi.src.Point;
 
-public class Line extends Shape{
+public class Line implements ShapeInterface {
+
     private Point p1;
     private Point p2;
 
 
-    public Line(Point p1, Point p2, Canvas canvas) {
-        super(canvas);
+    public Line(Point p1, Point p2) {
+        super();
         this.p1 = p1;
         this.p2 = p2;
     }
@@ -17,7 +17,8 @@ public class Line extends Shape{
     /**
      * Draw Line using Bresenham Algorithm
      */
-    public void draw() {
+    public byte[][] draw(byte[][] output) {
+
         int x = p1.getX(), y = p1.getY(), x2 = p2.getX(), y2 = p2.getY();
         int w = x2 - x ;
         int h = y2 - y ;
@@ -35,7 +36,10 @@ public class Line extends Shape{
         }
         int numerator = longest >> 1 ;
         for (int i=0;i<=longest;i++) {
-            super.canvas.setCharAt(new Point(x,y),'x') ;
+            //super.canvas.setCharAt(new Point(x,y),'x') ;
+            //print to sysout.
+            output[y][x] = 'x';
+//            System.out.print(output[y][x]);
             numerator += shortest ;
             if (!(numerator<longest)) {
                 numerator -= longest ;
@@ -46,7 +50,6 @@ public class Line extends Shape{
                 y += dy2 ;
             }
         }
-
-        super.canvas.printCanvas();
+        return output;
     }
 }

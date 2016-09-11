@@ -3,27 +3,31 @@
  */
 package com.alaeddine.messadi.src;
 
+import com.alaeddine.messadi.src.shapes.ShapeInterface;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author alaeddine
  */
 public class Canvas {
 
     private int height;
     private int width;
-    private Character canvas[][];
+    private List<ShapeInterface> shapes;
 
     /**
-     * For the canvas bordure, we add two columns and two rows
+     * For the canvas borders, we add two columns and two rows
      *
-     * @param width int
+     * @param width  int
      * @param height int
      */
     public Canvas(int width, int height) {
-        this.height = height + 2;
-        this.width = width + 2;
-        this.canvas = new Character[this.height][this.width];
-        resetCanvas();
+        this.height = height + 2; // why +2
+        this.width = width + 2; // for the borders
+        this.shapes = new ArrayList<ShapeInterface>();
+        this.canvasByteArray = new byte[this.height][this.width];
     }
 
     public int getHeight() {
@@ -42,61 +46,42 @@ public class Canvas {
         this.width = width;
     }
 
-    public Character[][] getCanvas() {
-        return canvas;
-    }
+    // byte array instead of Character.
+    private byte[][] canvasByteArray = new byte[height][width];
 
-    public void setCanvas(Character[][] canvas) {
-        this.canvas = canvas;
-    }
-
-    /**
-     * A Method to reset the canvas, and draw the bordure
-     */
-    private void resetCanvas() {
-        for (int row = 0; row < this.canvas.length; row++) {
-            for (int col = 0; col < this.canvas[row].length; col++) {
-                if (row == 0 || row == this.canvas.length - 1) {
-                    this.canvas[row][col] = '-';
-                } else if (col == 0 || col == this.canvas[row].length - 1) {
-                    this.canvas[row][col] = '|';
-                } else {
-                    this.canvas[row][col] = ' ';
-                }
-            }
-        }
+    public boolean addShape(ShapeInterface shapeInterface) {
+        return shapes.add(shapeInterface);
     }
 
     /**
      * Method to render the canvas in the console
      */
     public void printCanvas() {
+
+        // create borders.
+        for (int row = 0; row < canvasByteArray.length; row++) {
+            for (int col = 0; col < canvasByteArray[row].length; col++) {
+                if (row == 0 || row == canvasByteArray.length - 1) {
+                    canvasByteArray[row][col] = '-';
+                } else if (col == 0 || col == canvasByteArray[row].length - 1) {
+                    canvasByteArray[row][col] = '|';
+                } else {
+                    canvasByteArray[row][col] = ' ';
+                }
+            }
+        }
+
+        // append shapes one by one.
+        for (ShapeInterface shapeInterface : shapes) {
+            canvasByteArray = shapeInterface.draw(canvasByteArray);
+        }
+
+        // print to console.
         for (int i = 0; i < this.height; i++) {
             for (int j = 0; j < this.width; j++) {
-                System.out.print(this.canvas[i][j]);
+                System.out.print((char) canvasByteArray[i][j]);
             }
             System.out.println();
-        }
-    }
-
-    public boolean setCharAt(Point p, Character c) {
-        if (this.getValueAt(p) != -1){
-            this.canvas[p.getY()][p.getX()] = c;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Method to avoid IndexOutOfBoundExceptions. This method return -1 if you
-     * try to access an invalid position.
-     */
-    public int getValueAt(Point p) {
-        if (p.getY() < 0 || p.getX() < 0 || p.getY() > this.canvas.length || p.getX() > this.canvas[p.getY()].length) {
-            return -1;
-        } else {
-            return this.canvas[p.getY()][p.getX()];
         }
     }
 }
