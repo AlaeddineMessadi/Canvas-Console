@@ -7,14 +7,14 @@ public class CmdC extends Command {
         return "c";
     }
 
-    public Canvas execute(String[] parameters) {
+    public int execute(String[] parameters) {
         if (!this.validate(parameters)) {
-            return null;
+            return -1;
         }
 
         super.canvas = new Canvas(Integer.parseInt(parameters[0]), Integer.parseInt(parameters[1]));
         canvas.printCanvas();
-        return super.canvas;
+        return 0;
     }
 
     public boolean validateLength(String[] parameters) {

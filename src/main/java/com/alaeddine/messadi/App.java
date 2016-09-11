@@ -2,14 +2,13 @@ package com.alaeddine.messadi;
 
 import com.alaeddine.messadi.src.factory.CommandFactory;
 import com.alaeddine.messadi.src.Canvas;
-import com.alaeddine.messadi.src.shapes.ShapeInterface;
 import com.alaeddine.messadi.src.validator.*;
 
 import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Hello world!
+ * Springer Canvas - Console
  *
  */
 
@@ -39,22 +38,23 @@ public class App
                     switch (cmd){
                         case 'c':
                             command = commandFactory.getCommand(cmd);
-                            canvas = command.execute(parameters);
+                            command.execute(parameters);
+                            canvas = command.getCanvas();
                             break;
                         case 'l' :
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
-                            canvas = command.execute(parameters);
+                            command.execute(parameters);
                             break;
                         case 'r' :
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
-                            canvas = command.execute(parameters);
+                            command.execute(parameters);
                             break;
                         case 'b' :
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
-                            canvas = command.execute(parameters);
+                            command.execute(parameters);
                             break;
                         case 'q' :
                             Command command4 = commandFactory.getCommand(cmd);
@@ -80,7 +80,6 @@ public class App
         System.out.println("*   2) L 6 3 6 4      to draw a line     *");
         System.out.println("*   2) R 16 1 20 3    to draw rectangle  *");
         System.out.println("*   3) B 10 3 o       bucket fill        *");
-        System.out.println("*   4) extra          !?,>3$@@]|-        *");
         System.out.println("*                                        *");
         System.out.println("******************************************");
         System.out.println("*   3) Q              to Exit            *");

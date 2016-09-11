@@ -1,18 +1,16 @@
 package com.alaeddine.messadi.src.validator;
 
-import com.alaeddine.messadi.src.Canvas;
-
 public class CmdQ extends Command {
     public String getName() {
         return "q";
     }
 
-    public Canvas execute(String[] parameters) {
+    public int execute(String[] parameters) {
         if (this.validateLength(parameters)) {
             System.out.println("Exit...");
             System.exit(0);
         }
-        return null;
+        return 0;
     }
 
     public boolean validateLength(String[] parameters) {
