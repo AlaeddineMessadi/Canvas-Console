@@ -29,7 +29,7 @@ public abstract class Command {
             return false;
         }
         if (this.canvas == null) {
-            System.out.println("You need to Create a Canvas first");
+            System.out.println("You nee to Create a Canvas first");
             return false;
         }
         return validateLength(parameters) && validateTypes(parameters);
@@ -54,8 +54,8 @@ public abstract class Command {
         return true;
     }
 
-    protected static boolean validateParams(String[] parameters){
-        if (parameters == null){
+    protected static boolean validateParams(String[] parameters) {
+        if (parameters == null) {
             System.out.println("Parameters are missing");
             return false;
         }
