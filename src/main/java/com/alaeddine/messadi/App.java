@@ -75,30 +75,13 @@ public class App
         System.out.println("*                                        *");
         System.out.println("*                  CMD                   *");
         System.out.println("*                                        *");
-        System.out.println("*   0) C 20 4         to create a convas *");
-        System.out.println("*   1) L 1 2 6 2      to draw a line     *");
-        System.out.println("*   2) L 6 3 6 4      to draw a line     *");
-        System.out.println("*   2) R 16 1 20 3    to draw rectangle  *");
-        System.out.println("*   3) B 10 3 o       bucket fill        *");
+        System.out.println("*   0) C w h          to create a convas *");
+        System.out.println("*   1) L x1 y1 x2 y2  to draw a line     *");
+        System.out.println("*   2) R x1 y1 x2 y2  to draw rectangle  *");
+        System.out.println("*   3) B x1 y1 color  to refill          *");
         System.out.println("*                                        *");
         System.out.println("******************************************");
         System.out.println("*   3) Q              to Exit            *");
         System.out.println("******************************************");
-
-//        System.out.println("******************************************");
-//        System.out.println("***********  Hello Dear Reviewer *********");
-//        System.out.println("******************************************");
-//        System.out.println("*                                        *");
-//        System.out.println("*                  CMD                   *");
-//        System.out.println("*                                        *");
-//        System.out.println("*   0) C w h          to create a convas *");
-//        System.out.println("*   1) L x1 y1 x2 y2  to draw a line     *");
-//        System.out.println("*   2) R x1 y1 x2 y2  to draw rectangle  *");
-//        System.out.println("*   3) B x1 y1 color  to refill          *");
-//        System.out.println("*                                        *");
-//        System.out.println("******************************************");
-//        System.out.println("*   3) Q              to Exit            *");
-//        System.out.println("******************************************");
     }
-
 }
