@@ -34,29 +34,35 @@ public class App
 
                 CommandFactory commandFactory = new CommandFactory();
                 Command command;
+                // check if the command exists
                 if (availableCmd.indexOf(cmd) > -1) {
                     switch (cmd){
                         case 'c':
+                            // command Create
                             command = commandFactory.getCommand(cmd);
                             command.execute(parameters);
                             canvas = command.getCanvas();
                             break;
                         case 'l' :
+                            // command Line
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
                             command.execute(parameters);
                             break;
                         case 'r' :
+                            // command Rectangle
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
                             command.execute(parameters);
                             break;
                         case 'b' :
+                            // command bucket fill
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
                             command.execute(parameters);
                             break;
                         case 'q' :
+                            // command exit
                             Command command4 = commandFactory.getCommand(cmd);
                             command4.execute(parameters);
                             break;

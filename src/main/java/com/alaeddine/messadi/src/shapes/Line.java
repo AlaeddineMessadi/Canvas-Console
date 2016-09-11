@@ -19,37 +19,25 @@ public class Line implements ShapeInterface {
      */
     public byte[][] draw(byte[][] output) {
 
-        int x = p1.getX(), y = p1.getY(), x2 = p2.getX(), y2 = p2.getY();
-        int w = x2 - x ;
-        int h = y2 - y ;
-        int dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0 ;
-        if (w<0) dx1 = -1 ; else if (w>0) dx1 = 1 ;
-        if (h<0) dy1 = -1 ; else if (h>0) dy1 = 1 ;
-        if (w<0) dx2 = -1 ; else if (w>0) dx2 = 1 ;
-        int longest = Math.abs(w) ;
-        int shortest = Math.abs(h) ;
-        if (!(longest>shortest)) {
-            longest = Math.abs(h) ;
-            shortest = Math.abs(w) ;
-            if (h<0) dy2 = -1 ; else if (h>0) dy2 = 1 ;
-            dx2 = 0 ;
-        }
-        int numerator = longest >> 1 ;
-        for (int i=0;i<=longest;i++) {
-            //super.canvas.setCharAt(new Point(x,y),'x') ;
-            //print to sysout.
-            output[y][x] = 'x';
-//            System.out.print(output[y][x]);
-            numerator += shortest ;
-            if (!(numerator<longest)) {
-                numerator -= longest ;
-                x += dx1 ;
-                y += dy1 ;
-            } else {
-                x += dx2 ;
-                y += dy2 ;
-            }
-        }
+        output[p1.getY()][p1.getX()] = 'x';
+        output[p2.getY()][p2.getX()] = 'x';
+
+        drawLine(p1.getX(), p1.getY(), p2.getX(), p2.getY(), output);
         return output;
+    }
+
+    // Recursive function drawLine
+    private void drawLine(int x0, int y0, int x1, int y1, byte[][] output) {
+        int xMid, yMid;
+
+        xMid = (x0 + x1) / 2;
+        yMid = (y0 + y1) / 2;
+
+        if ((x0 == xMid && y0 == yMid) || (x1 == xMid && y1 == yMid)) return;
+        // insert the char to matrix
+        output[yMid][xMid] = 'x';
+
+        drawLine(x0, y0, xMid, yMid, output);
+        drawLine(xMid, yMid, x1, y1, output);
     }
 }

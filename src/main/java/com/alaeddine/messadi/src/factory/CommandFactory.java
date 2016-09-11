@@ -3,6 +3,9 @@ package com.alaeddine.messadi.src.factory;
 
 import com.alaeddine.messadi.src.validator.*;
 
+/**
+ * Factory design pattern
+ */
 public class CommandFactory {
     public Command getCommand(Character cmd) {
         if(cmd == null){
