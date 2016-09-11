@@ -26,4 +26,5 @@ Design patterns
 ------------
 
 Factory Design pattern
+
 Dependency injection Design pattern
