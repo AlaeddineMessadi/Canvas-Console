@@ -21,7 +21,7 @@ public abstract class Command {
 
     public abstract String getName();
 
-    public abstract ShapeInterface execute(String[] parameters);
+    public abstract Canvas execute(String[] parameters);
 
     public abstract boolean validateLength(String[] parameters);
 
@@ -37,16 +37,16 @@ public abstract class Command {
     }
 
     public boolean validateTypes(String[] parameters) {
-        for (int i = 0; i < parameters.length; i++) {
-            if (!isInteger(parameters[i])) {
-                System.out.println("Parameter (" + parameters[i] + ") is not and integer");
+        for (String param : parameters) {
+            if (!isInteger(param)) {
+                System.out.println("Parameter (" + param + ") is not and integer");
                 return false;
             }
         }
         return true;
     }
 
-    public static boolean isInteger(String s) {
+    protected static boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
         } catch (NumberFormatException e) {
@@ -55,7 +55,7 @@ public abstract class Command {
         return true;
     }
 
-    public boolean validateParams(String[] parameters){
+    protected static boolean validateParams(String[] parameters){
         if (parameters == null){
             System.out.println("Parameters are missing");
             return false;

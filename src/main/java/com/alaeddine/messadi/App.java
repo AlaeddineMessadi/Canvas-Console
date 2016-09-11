@@ -39,24 +39,22 @@ public class App
                     switch (cmd){
                         case 'c':
                             command = commandFactory.getCommand(cmd);
-                            command.execute(parameters);
-                            canvas = command.getCanvas();
-                            canvas.printCanvas();
+                            canvas = command.execute(parameters);
                             break;
                         case 'l' :
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
-                            ShapeInterface line = command.execute(parameters);
+                            canvas = command.execute(parameters);
                             break;
                         case 'r' :
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
-                            command.execute(parameters);
+                            canvas = command.execute(parameters);
                             break;
                         case 'b' :
                             command = commandFactory.getCommand(cmd);
                             command.setCanvas(canvas);
-                            command.execute(parameters);
+                            canvas = command.execute(parameters);
                             break;
                         case 'q' :
                             Command command4 = commandFactory.getCommand(cmd);

@@ -1,5 +1,6 @@
 package com.alaeddine.messadi.src.validator;
 
+import com.alaeddine.messadi.src.Canvas;
 import com.alaeddine.messadi.src.Point;
 import com.alaeddine.messadi.src.shapes.Fill;
 import com.alaeddine.messadi.src.shapes.ShapeInterface;
@@ -11,7 +12,7 @@ public class CmdB extends Command{
         return "b";
     }
 
-    public ShapeInterface execute(String[] parameters) {
+    public Canvas execute(String[] parameters) {
         if (!this.validate(parameters)) {
             return null;
         }
@@ -19,7 +20,7 @@ public class CmdB extends Command{
         ShapeInterface fill = new Fill(p, (byte)parameters[2].charAt(0));
         canvas.addShape(fill);
         canvas.printCanvas();
-        return fill;
+        return super.canvas;
     }
 
     public boolean validateLength(String[] parameters) {

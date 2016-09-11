@@ -1,5 +1,6 @@
 package com.alaeddine.messadi.src.validator;
 
+import com.alaeddine.messadi.src.Canvas;
 import com.alaeddine.messadi.src.Point;
 import com.alaeddine.messadi.src.shapes.Line;
 import com.alaeddine.messadi.src.shapes.ShapeInterface;
@@ -10,7 +11,7 @@ public class CmdL extends Command{
         return "l";
     }
 
-    public ShapeInterface execute(String[] parameters) {
+    public Canvas execute(String[] parameters) {
         if (!this.validate(parameters)) {
             return null;
         }
@@ -20,7 +21,7 @@ public class CmdL extends Command{
         ShapeInterface line = new Line(p1, p2);
         canvas.addShape(line);
         canvas.printCanvas();
-        return line;
+        return super.canvas;
     }
 
     public boolean validateLength(String[] parameters) {

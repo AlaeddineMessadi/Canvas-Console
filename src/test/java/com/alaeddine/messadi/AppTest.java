@@ -43,7 +43,7 @@ public class AppTest
         assertTrue(cmd.execute(parameters2) == null);
         assertTrue(cmd.execute(parameters3) == null);
         assertTrue(cmd.execute(null) == null);
-        assertTrue(cmd.execute(parameters1) instanceof Line);
+        assertTrue(cmd.execute(parameters1) != null);
     }
 
     public void testCommandL() {
@@ -68,10 +68,8 @@ public class AppTest
         assertTrue(cmdL.execute(parametersL2) == null);
         assertTrue(cmdL.execute(parametersL3) == null);
         assertTrue(cmdL.execute(parametersL4) == null);
-        ShapeInterface line = cmdL.execute(parametersL1);
-        ShapeInterface line2 = cmdL.execute(parametersL5);
-        assertTrue(line instanceof Line);
-        assertTrue(line2 instanceof Line);
+        assertTrue(cmdL.execute(parametersL1) != null);
+        assertTrue(cmdL.execute(parametersL5) != null);
     }
 
     public void testCommandR() {
@@ -96,8 +94,7 @@ public class AppTest
         assertTrue(cmdL.execute(parametersR3) == null);
         assertTrue(cmdL.execute(parametersR4) == null);
 
-        ShapeInterface rectangle = cmdL.execute(parametersR1);
-        assertTrue(rectangle instanceof Rectangle);
+        assertTrue(cmdL.execute(parametersR1) != null);
     }
 
     public void testCommandB() {
@@ -121,8 +118,7 @@ public class AppTest
         assertTrue(cmdB.execute(parametersB2) == null);
         assertTrue(cmdB.execute(parametersB3) == null);
         assertTrue(cmdB.execute(parametersB4) == null);
-        ShapeInterface fill = cmdB.execute(parametersB1);
-        assertTrue( fill instanceof Fill);
+        assertTrue( cmdB.execute(parametersB1) != null);
     }
 
     public void testApp() {
@@ -139,26 +135,26 @@ public class AppTest
         String[] parametersB = {"10", "3", "o"};
 
         // create
-        assertTrue(cmd.execute(parametersC) instanceof Line);
+        assertTrue(cmd.execute(parametersC) != null);
         canvas = cmd.getCanvas();
 
         // line
         cmd = commandFactory.getCommand('l');
         assertTrue(cmd instanceof CmdL);
         cmd.setCanvas(canvas);
-        assertTrue(cmd.execute(parametersL1) instanceof Line);
-        assertTrue(cmd.execute(parametersL2) instanceof Line);
+        assertTrue(cmd.execute(parametersL1) != null);
+        assertTrue(cmd.execute(parametersL2) != null);
 
         // rectangle
         cmd = commandFactory.getCommand('r');
         assertTrue(cmd instanceof CmdR);
         cmd.setCanvas(canvas);
-        assertTrue(cmd.execute(parametersR) instanceof Rectangle);
+        assertTrue(cmd.execute(parametersR) != null);
 
         // bucket fill
         cmd = commandFactory.getCommand('b');
         assertTrue(cmd instanceof CmdB);
         cmd.setCanvas(canvas);
-        assertTrue(cmd.execute(parametersB) instanceof Fill);
+        assertTrue(cmd.execute(parametersB) != null);
     }
 }
